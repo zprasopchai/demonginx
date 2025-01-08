@@ -48,14 +48,11 @@ pipeline {
                 //     echo "Docker Image pushed: ${dockerImage}"
                 // }
                 script {
-                    withCredentials([string(credentialsId: 'docker-credentials-id', variable: 'docker-hub')]) {
-			        sh "docker login -u username -p ${docker-credentials-id}"
-    	            }
-                    sh """
-                    docker push ${dockerImage}
-                    """
-                    echo "Docker Image pushed: ${dockerImage}"
-                }
+                    withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'PEGA_DB_USERNAME', passwordVariable: 'PEGA_DB_PASSWORD')]) {
+    sh 'echo $PEGA_DB_PASSWORD' // warning will be thrown by jenkins
+  
+  }
+                    
             }
         }
     }
