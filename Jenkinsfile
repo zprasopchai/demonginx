@@ -49,9 +49,10 @@ pipeline {
                 // }
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'PEGA_DB_USERNAME', passwordVariable: 'PEGA_DB_PASSWORD')]) {
-    sh 'echo $PEGA_DB_PASSWORD' // warning will be thrown by jenkins
+                    sh 'echo $PEGA_DB_PASSWORD' // warning will be thrown by jenkins
   
-  }
+                     }
+                }
                     
             }
         }
