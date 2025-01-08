@@ -48,9 +48,13 @@ pipeline {
                 //     echo "Docker Image pushed: ${dockerImage}"
                 // }
                 script {
-                    docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
-                    dockerImage.push()
-                }
+                    withCredentials([string(credentialsId: 'docker-credentials-id', variable: 'docker-hub')]) {
+			        sh "docker login -u username -p ${docker-credentials-id}"
+    	            }
+                    sh """
+                    docker push ${dockerImage}
+                    """
+                    echo "Docker Image pushed: ${dockerImage}"
                 }
             }
         }
