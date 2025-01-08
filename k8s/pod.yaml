@@ -1,29 +1,29 @@
-# k8s manifests: create  pod 
-apiVersion: v1
-kind: Pod
-metadata:
-  name: linux
-  namespace: demonginx
-spec:
-  containers:
-  - name: busybox
-    image: busybox
-    command: ["sleep", "3600"]
-    resources:
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
+# # k8s manifests: create  pod 
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: linux
+#   namespace: demonginx
+# spec:
+#   containers:
+#   - name: busybox
+#     image: busybox
+#     command: ["sleep", "3600"]
+#     resources:
+#       limits:
+#         memory: "128Mi"
+#         cpu: "500m"
+#       requests:
+#         memory: "64Mi"
+#         cpu: "250m"
 
-  - name: alpine
-    image: alpine
-    command: ["sleep", "3600"]
-    resources:
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
+#   - name: alpine
+#     image: alpine
+#     command: ["sleep", "3600"]
+#     resources:
+#       limits:
+#         memory: "128Mi"
+#         cpu: "500m"
+#       requests:
+#         memory: "64Mi"
+#         cpu: "250m"
