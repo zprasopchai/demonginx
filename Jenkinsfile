@@ -19,7 +19,7 @@ pipeline {
                 script {
                     sh 'docker --version'
 
-                    def dockerImage = "${IMAGE_NAME}:${VERSION_TAG}"
+                    def dockerImage = "${DOCKER_REGISTRY}:${VERSION_TAG}"
 
                     sh """
                     docker build -t ${dockerImage} .
