@@ -14,6 +14,7 @@ pipeline {
                 
                 git branch: 'main', url: 'https://github.com/zprasopchai/demonginx.git'
             }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
