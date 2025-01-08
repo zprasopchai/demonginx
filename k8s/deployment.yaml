@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: my-app-container
-          image: turterdev/demonginx:36
+          image: turterdev/demonginx:37
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
