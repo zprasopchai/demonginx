@@ -49,7 +49,9 @@ pipeline {
                 // }
                 script {
             docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
-            dockerImage.push()
+                sh """
+                docker push ${dockerImage}
+                """
           }
                 }
             }
