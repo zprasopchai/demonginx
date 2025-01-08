@@ -21,7 +21,7 @@ pipeline {
                 script {
                     sh 'docker --version'
 
-                    def dockerImage = "${DOCKER_REGISTRY}:${VERSION_TAG}"
+                    def dockerImage = "${IMAGE_NAME}:${VERSION_TAG}"
 
                     sh """
                     docker build -t ${dockerImage} .
@@ -48,9 +48,11 @@ pipeline {
                 //     echo "Docker Image pushed: ${dockerImage}"
                 // }
                 script {
-            docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
-          }
-          dockerImage.push("${VERSION_TAG}")
+                    docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
+                    }
+                    sh """
+                    docker push ${DOCKER_REGISTRY}:${VERSION_TAG}
+                    """
                 }
             }
         }
