@@ -1,20 +1,21 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-deployment
+  name: my-deployment
+  namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: trivial-go-web-app
+      app: my-deployment
   template:
     metadata:
       labels:
-        app: trivial-go-web-app
+        app: my-deployment
     spec:
       containers:
-      - name: demonginx
-        image: turterdev/demonginx:36
-        ports:
-        - containerPort: 8090
+        - name: my-app-container
+          image: turterdev/demonginx:36
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
