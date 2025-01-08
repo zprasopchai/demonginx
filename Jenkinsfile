@@ -48,15 +48,10 @@ pipeline {
                 //     echo "Docker Image pushed: ${dockerImage}"
                 // }
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'PEGA_DB_USERNAME', passwordVariable: 'PEGA_DB_PASSWORD')]) {
-                        sh '''
-                        echo "Username: $PEGA_DB_USERNAME"
-                        echo "Password: $PEGA_DB_PASSWORD"
-                        '''
-  
-                     }
+            docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
+            dockerImage.push()
+          }
                 }
-                    
             }
         }
     }
