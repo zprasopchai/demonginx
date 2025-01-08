@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demonginx
+  namespace: demonginx
+  labels:
+    app: demonginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demonginx
+  template:
+    metadata:
+      labels:
+        app: demonginx
+    spec:
+      containers:
+      - name: demonginx
+        image: turterdev/demonginx:36
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi

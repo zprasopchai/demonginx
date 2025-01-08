@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demonginx
+  namespace: demonginx
+spec:
+  type: NodePort # ClusterIP, NodePort, LoadBalancer, ExternalName
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+    protocol: TCP
+  selector:
+    app: demonginx # match the label in the deployment
