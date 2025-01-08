@@ -9,11 +9,11 @@ pipeline {
     }
 
     stages {
-        // stage('Clone Repository') {
-        //     steps {
-        //         git branch: 'main', credentialsId: 'Token', url: ''
-        //     }
-        // }
+        stage('Clone Repository') {
+            steps {
+                
+                git branch: 'main', url: 'https://github.com/zprasopchai/demonginx.git'
+            }
         stage('Build Docker Image') {
             steps {
                 script {
