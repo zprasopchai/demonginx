@@ -17,6 +17,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    sh 'docker --version'
+
                     def dockerImage = "${IMAGE_NAME}:${VERSION_TAG}"
 
                     sh """
