@@ -50,11 +50,6 @@ pipeline {
                 script {
             docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
 
-                echo "Pushing image to registry: ${dockerImage}"
-
-                sh """
-                docker push ${dockerImage}
-                """
           }
                 }
             }
