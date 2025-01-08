@@ -31,19 +31,24 @@ pipeline {
         }
         stage('Push Docker Image to registry') {
             steps {
+                // script {
+                //     withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                //         sh """
+                //         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin ${DOCKER_REGISTRY}
+                //         """
+                //     }
+                    
+                //     def dockerImage = "${DOCKER_REGISTRY}/${IMAGE_NAME}:${VERSION_TAG}"
+                //     sh """
+                //     docker push ${dockerImage}
+                //     """
+                    
+                //     echo "Docker Image pushed: ${dockerImage}"
+                // }
                 script {
-                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh """
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin ${DOCKER_REGISTRY}
-                        """
-                    }
-                    
-                    def dockerImage = "${DOCKER_REGISTRY}/${IMAGE_NAME}:${VERSION_TAG}"
-                    sh """
-                    docker push ${dockerImage}
-                    """
-                    
-                    echo "Docker Image pushed: ${dockerImage}"
+                    docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
+                    dockerImage.push()
+                }
                 }
             }
         }
