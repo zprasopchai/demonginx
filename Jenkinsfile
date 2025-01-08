@@ -49,8 +49,8 @@ pipeline {
                 // }
                 script {
             docker.withRegistry( '', DOCKER_CREDENTIALS_ID ) {
-
           }
+          dockerImage.push("${VERSION_TAG}")
                 }
             }
         }
