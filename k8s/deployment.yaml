@@ -1,29 +1,20 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demonginx-deployment
-  namespace: demonginx
-  labels:
-    app: demonginx
+  name: simple-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: demonginx
+      app: trivial-go-web-app
   template:
     metadata:
       labels:
-        app: demonginx
+        app: trivial-go-web-app
     spec:
       containers:
       - name: demonginx
         image: turterdev/demonginx:36
         ports:
-        - containerPort: 80
-        resources:
-          limits:
-            cpu: 100m
-            memory: 100Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
+        - containerPort: 8090
