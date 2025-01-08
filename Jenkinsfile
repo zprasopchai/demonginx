@@ -6,6 +6,7 @@ pipeline {
         VERSION_TAG = "${env.BUILD_ID}"
         DOCKER_REGISTRY = 'turterdev/demonginx'
         DOCKER_CREDENTIALS_ID = 'docker-credentials-id'
+        dockerImage = ''
     }
 
     stages {
