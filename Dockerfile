@@ -2,17 +2,12 @@
 FROM nginx:latest
 
 COPY index.html /usr/share/nginx/html/
-
 COPY ./nginx/conf.d/ /etc/nginx/conf.d/
 
-RUN chmod -R 755 /var/www/html && \
-    chown -R nginx:nginx /var/www/html
-# Expose port 80 to the outside world
+# Fix permissions on actual nginx html root
+RUN chmod -R 755 /usr/share/nginx/html && \
+    chown -R nginx:nginx /usr/share/nginx/html
+
 EXPOSE 80
 
-# Command to start NGINX when the container starts
 CMD ["nginx", "-g", "daemon off;"]
-
-
-
-
