@@ -19,20 +19,21 @@ env:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    # environment: production
     environment: ${{ github.ref_type == 'tag' && 'production' || github.ref_name }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set IMAGE_VERSION by branch or tag
+      - name: Set IMAGE_VERSION and IS_TAG
         id: vars
         run: |
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             echo "IMAGE_VERSION=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+            echo "IS_TAG=true" >> $GITHUB_OUTPUT
           else
             echo "IMAGE_VERSION=${GITHUB_REF_NAME}" >> $GITHUB_OUTPUT
+            echo "IS_TAG=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Log in to registry
@@ -46,3 +47,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_TAG }}:${{ steps.vars.outputs.IMAGE_VERSION }}
+            ${{ steps.vars.outputs.IS_TAG == 'true' && format('ghcr.io/{0}/{1}:latest', github.repository_owner, env.IMAGE_TAG) || '' }}
